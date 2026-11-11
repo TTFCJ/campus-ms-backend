@@ -1,0 +1,79 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: campus-ms
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 50MB
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.campus.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# ============ 业务自定义配置 ============
+campus:
+  jwt:
+    # 生产环境请改成 32 位以上随机串，并放入环境变量
+    secret: campus-ms-jwt-secret-key-please-change-in-production-2025
+    # token 有效期（分钟）
+    expire-minutes: 720
+    header: Authorization
+    prefix: "Bearer "
+  # 登录失败锁定
+  login:
+    max-retry: 5
+    lock-minutes: 10
+    # 是否开启图形验证码（开发调试可在 application-dev.yml 关掉）
+    captcha-enabled: true
+  # 文件上传
+  minio:
+    enabled: true
+    endpoint: http://127.0.0.1:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket: campus
+    # 预签名 URL 有效期（秒）
+    presign-seconds: 3600
+  # 跨域白名单（逗号分隔，不要写成 YAML 数组，@Value 解析不了数组）
+  cors:
+    allowed-origins: http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+logging:
+  level:
+    root: info
+    com.campus: debug
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"
