@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎓 高校综合管理系统 · 后端
+# 高校综合管理系统 · 后端
 
 **SpringBoot 3 + MyBatis-Plus + MySQL 8 + Redis**
 
-一套覆盖 **教务 / 学工 / 后勤 / 第二课堂 / 课堂考勤** 的高校业务后端
+覆盖教务 / 学工 / 后勤 / 第二课堂 / 课堂考勤的高校业务后端
 
 [![SpringBoot](https://img.shields.io/badge/SpringBoot-3.2.5-6DB33F?style=flat-square&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![MyBatis-Plus](https://img.shields.io/badge/MyBatis--Plus-3.5.5-1E90FF?style=flat-square)](https://baomidou.com/)
@@ -13,39 +13,41 @@
 [![JDK](https://img.shields.io/badge/JDK-17-ED8B00?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![License](https://img.shields.io/badge/License-MIT-22C55E?style=flat-square)](LICENSE)
 
-[功能模块](#-功能模块) · [系统架构](#-系统架构) · [快速开始](#-快速开始) · [权限体系](#-权限体系) · [接口文档](#-接口文档) · [数据库](#-数据库设计)
+[功能模块](#功能模块) · [系统架构](#系统架构) · [快速开始](#快速开始) · [权限体系](#权限体系) · [接口文档](#接口文档) · [数据库](#数据库设计)
 
 </div>
 
 ---
 
-## 📖 项目简介
+## 项目简介
 
-面向高校的综合性业务后端，采用 **单体 B/S 架构**，一套服务同时支撑 PC 管理端与移动端 App。
+面向高校的综合性业务后端，采用**单体 B/S 架构**，一套服务同时支撑 PC 管理端与移动端 App。
 
 核心特点：
 
-- 🔐 **RBAC + 四档数据权限** —— 功能权限精确到按钮，数据权限按院系 / 班级 / 本人隔离
-- ⚡ **Redis 分布式锁** —— 选课高并发防超员
-- 🧩 **冲突检测** —— 排课的班级 / 教师 / 教室三重校验
-- 📋 **状态机驱动** —— 成绩、请假、助学金、报修全流程状态流转
-- 📱 **移动端友好** —— 同一套接口服务 Web 与 App
+| 特性 | 说明 |
+|---|---|
+| RBAC + 四档数据权限 | 功能权限精确到按钮，数据权限按院系 / 班级 / 本人隔离 |
+| Redis 分布式锁 | 选课高并发防超员，SQL 原子扣减 |
+| 三重冲突检测 | 排课时的班级 / 教师 / 教室校验 |
+| 状态机驱动 | 成绩、请假、助学金、报修全流程状态流转 |
+| 移动端友好 | 同一套接口服务 Web 与 App |
 
 ---
 
-## ✨ 功能模块
+## 功能模块
 
 <table>
 <tr>
 <td width="50%" valign="top">
 
-### 📚 教务管理
+### 教务管理
 
 - 课程库 / 教室管理
-- **智能排课**（三重冲突检测）
+- 智能排课（三重冲突检测）
 - 课表查询（学生 / 教师 / 班级三视角）
-- **选课**（Redis 锁 + 原子扣减）
-- **成绩管理**（5 状态机）
+- 选课（Redis 锁 + 原子扣减）
+- 成绩管理（5 状态机）
 - 考试安排 / 监考
 - 培养方案
 - 调课申请审批
@@ -54,16 +56,16 @@
 </td>
 <td width="50%" valign="top">
 
-### 🎒 学工管理
+### 学工管理
 
 - 学生档案
-- **请假申请**（多级审批）
-- **助学金**（三级审批 + 公示）
+- 请假申请（多级审批）
+- 助学金（三级审批 + 公示）
 - 奖惩记录
-- **学生关爱平台**
+- 学生关爱平台
   - 关爱对象 / 风险分级
   - 关爱记录时间轴
-- **宿舍归寝**
+- 宿舍归寝
   - 正常 / 晚归 / 未归 / 请假
   - 支持门禁设备对接
 
@@ -72,11 +74,11 @@
 <tr>
 <td width="50%" valign="top">
 
-### 🏢 后勤管理
+### 后勤管理
 
 - 宿舍楼 / 房间
 - 宿舍分配 / 退宿
-- **报修工单**
+- 报修工单
   - 待派单 → 维修中 → 已完成 → 验收评分
 - 场地预约
 - 教室借用审批
@@ -84,12 +86,12 @@
 </td>
 <td width="50%" valign="top">
 
-### 🏆 第二课堂
+### 第二课堂
 
 - 活动发布 / 报名
-- **现场扫码签到**
+- 现场扫码签到
 - 活动组织者签到管理
-- **学分统计**
+- 学分统计
   - 按团中央「第二课堂成绩单」制度
   - 七大模块 / 五号文标准
 
@@ -98,11 +100,11 @@
 <tr>
 <td width="50%" valign="top">
 
-### ✅ 课堂考勤
+### 课堂考勤
 
 - 教师发起点名
 - 6 位签到码
-- **五种状态**自动判定
+- 五种状态自动判定
   - 正常 / 迟到 / 早退 / 缺勤 / 请假
 - 教师查看缺勤名单
 - 教务出勤统计
@@ -110,7 +112,7 @@
 </td>
 <td width="50%" valign="top">
 
-### 📊 统计报表
+### 统计报表
 
 - 学生分布
 - 成绩分布
@@ -124,7 +126,7 @@
 
 ---
 
-## 🏗 系统架构
+## 系统架构
 
 ```mermaid
 graph TB
@@ -137,9 +139,9 @@ graph TB
         B1[JWT 认证拦截器]
         B2[权限校验 AOP]
         B3[数据权限拦截器]
-        B4[Controller 32]
-        B5[Service 14]
-        B6[Mapper 41]
+        B4[Controller x32]
+        B5[Service x14]
+        B6[Mapper x41]
     end
 
     subgraph Storage["存储层"]
@@ -165,45 +167,49 @@ graph TB
 
 ```
 HTTP 请求
-   ↓
-AuthInterceptor      解析 JWT → 校验 Redis 登录态 → 注入 UserContext
-   ↓
-PermissionAspect     校验 @RequiresPerm 权限标识
-   ↓
-DataPermissionHandler 按 data_scope 自动拼接 SQL 条件
-   ↓
-Controller → Service → Mapper
-   ↓
+   |
+AuthInterceptor        解析 JWT -> 校验 Redis 登录态 -> 注入 UserContext
+   |
+PermissionAspect       校验 @RequiresPerm 权限标识
+   |
+DataPermissionHandler  按 data_scope 自动拼接 SQL 条件
+   |
+Controller -> Service -> Mapper
+   |
 Result<T> 统一响应
 ```
 
 ---
 
-## 📊 项目规模
+## 项目规模
 
 <table>
 <tr>
 <td align="center" width="25%">
 
 ### 190
+
 **Java 文件**
 
 </td>
 <td align="center" width="25%">
 
 ### 203
+
 **REST 接口**
 
 </td>
 <td align="center" width="25%">
 
 ### 46
+
 **数据表**
 
 </td>
 <td align="center" width="25%">
 
 ### 32
+
 **业务模块**
 
 </td>
@@ -212,7 +218,7 @@ Result<T> 统一响应
 
 ---
 
-## 🚀 快速开始
+## 快速开始
 
 ### 环境要求
 
@@ -223,7 +229,7 @@ MySQL   8.0
 Redis   7.x
 ```
 
-### 1️⃣ 初始化数据库
+### 1. 初始化数据库
 
 ```bash
 mysql -uroot -p -e "CREATE DATABASE campus_ms DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;"
@@ -235,9 +241,9 @@ mysql -uroot -p campus_ms < docs/sql/04_care_dorm_ec.sql
 mysql -uroot -p campus_ms < docs/sql/05_care_dorm_ec_fix.sql
 ```
 
-> 💡 需要测试数据可额外执行 `06_test_data.sql`（44 学生 / 18 教师 / 397 成绩）
+> 需要测试数据可额外执行 `06_test_data.sql`（44 学生 / 18 教师 / 397 成绩）
 
-### 2️⃣ 修改配置
+### 2. 修改配置
 
 `src/main/resources/application-dev.yml`
 
@@ -253,14 +259,14 @@ spring:
       port: 6379
 ```
 
-### 3️⃣ 启动
+### 3. 启动
 
 ```bash
 mvn clean package -DskipTests
 java -jar target/campus-ms.jar
 ```
 
-### 4️⃣ 访问
+### 4. 访问
 
 | 地址 | 说明 |
 |---|---|
@@ -270,7 +276,7 @@ java -jar target/campus-ms.jar
 
 ---
 
-## 🔑 默认账号
+## 默认账号
 
 密码统一 `123456`
 
@@ -286,11 +292,11 @@ java -jar target/campus-ms.jar
 <tr><td><code>stu_001</code></td><td>学生</td><td>本人</td><td>课表 / 选课 / 成绩</td></tr>
 </table>
 
-> ⚠️ 权限变更后需重新登录（权限集合缓存在 Redis 的 `LoginUser`）
+> 权限变更后需重新登录（权限集合缓存在 Redis 的 `LoginUser`）
 
 ---
 
-## 🔐 权限体系
+## 权限体系
 
 ### 功能权限（注解式）
 
@@ -327,7 +333,7 @@ sequenceDiagram
 
     C->>S: POST /login
     S->>S: BCrypt 校验密码
-    S->>R: SET login:token:{token} → LoginUser
+    S->>R: SET login:token:{token} -> LoginUser
     S-->>C: { token, expiresIn }
 
     C->>S: GET /api/xxx (Bearer token)
@@ -339,12 +345,12 @@ sequenceDiagram
 
 ---
 
-## 🧠 核心设计
+## 核心设计
 
 ### 排课冲突检测
 
 ```java
-// 时间重叠判定：新排课的 start ≤ 已有 end 且 end ≥ 已有 start
+// 时间重叠判定：新排课的 start <= 已有 end 且 end >= 已有 start
 if (count(Wrappers.<Schedule>lambdaQuery()
         .eq(Schedule::getClazzId, dto.getClazzId())
         .le(Schedule::getSectionStart, dto.getSectionEnd())
@@ -362,7 +368,7 @@ if (count(Wrappers.<Schedule>lambdaQuery()
 int rows = scheduleMapper.update(null, Wrappers.<Schedule>lambdaUpdate()
         .setSql("current_num = current_num + 1")
         .eq(Schedule::getId, scheduleId)
-        .apply("current_num < max_num"));   // ← 关键
+        .apply("current_num < max_num"));   // 关键
 
 if (rows == 0) {
     throw new BizException("报名人数已满");
@@ -389,15 +395,15 @@ stateDiagram-v2
 
 | 状态 | 判定 |
 |---|---|
-| 🟢 正常 | 签到码开放后 2 分钟内签到 |
-| 🟡 迟到 | 超过 2 分钟签到 |
-| 🟠 早退 | 教师手动标记 |
-| 🔵 请假 | 当天有 `status=3` 的请假单 |
-| 🔴 缺勤 | 未签到且无请假（**实时计算，不落库**） |
+| 正常 | 签到码开放后 2 分钟内签到 |
+| 迟到 | 超过 2 分钟签到 |
+| 早退 | 教师手动标记 |
+| 请假 | 当天有 `status=3` 的请假单 |
+| 缺勤 | 未签到且无请假（**实时计算，不落库**） |
 
 ### 第二课堂学分
 
-依据《高校共青团"第二课堂成绩单"制度实施办法》（**中青联发〔2018〕5 号**）
+依据《高校共青团"第二课堂成绩单"制度实施办法》（中青联发〔2018〕5 号）
 
 | 模块 | 最低学分 | 映射活动类型 |
 |---|---:|:---|
@@ -412,14 +418,14 @@ stateDiagram-v2
 
 ---
 
-## 📡 接口文档
+## 接口文档
 
 启动后访问 Knife4j：`http://localhost:8080/api/doc.html`
 
 完整接口清单见 [docs/API.md](docs/API.md)（**203 个接口 / 32 个分组**）
 
 <details>
-<summary><b>📂 点击展开模块列表</b></summary>
+<summary><b>点击展开模块列表</b></summary>
 
 | 模块 | 接口数 | 说明 |
 |---|---:|---|
@@ -463,12 +469,12 @@ stateDiagram-v2
 
 ---
 
-## 🗄 数据库设计
+## 数据库设计
 
 **46 张表**，完整字段说明见 [docs/DATABASE.md](docs/DATABASE.md)
 
 <details>
-<summary><b>📂 点击展开表分组</b></summary>
+<summary><b>点击展开表分组</b></summary>
 
 | 分组 | 表 |
 |---|---|
@@ -483,11 +489,11 @@ stateDiagram-v2
 
 </details>
 
-**索引优化**：14 个复合索引 + 9 个冗余单列删除，每表索引数 ≤ 6
+**索引优化**：14 个复合索引 + 9 个冗余单列删除，每表索引数 <= 6
 
 ---
 
-## 📁 目录结构
+## 目录结构
 
 ```
 backend/
@@ -513,21 +519,21 @@ backend/
 
 ---
 
-## 🛠 开发指南
+## 开发指南
 
 ### 新增业务模块
 
-1. **建表** → `docs/sql/` 下加 SQL
-2. **Entity** → 继承 `BaseEntity`（自带 5 个公共字段）
-3. **Mapper** → `extends BaseMapper<T>` + `@Mapper`
-4. **Service** → 接口 + Impl
-5. **Controller** → 加 `@RequiresPerm`
-6. **菜单** → 插入 `sys_menu` + 授权 `sys_role_menu`
+1. 建表：`docs/sql/` 下加 SQL
+2. Entity：继承 `BaseEntity`（自带 5 个公共字段）
+3. Mapper：`extends BaseMapper<T>` + `@Mapper`
+4. Service：接口 + Impl
+5. Controller：加 `@RequiresPerm`
+6. 菜单：插入 `sys_menu` + 授权 `sys_role_menu`
 
 ### 分页查询注意
 
 ```java
-// ⚠️ Result<PageResult<T>> 嵌套时 Java 无法推断 T，需显式指定
+// Result<PageResult<T>> 嵌套时 Java 无法推断 T，需显式指定
 Page<Course> result = courseMapper.selectPage(page, w);
 return Result.ok(PageResult.<Course>of(result));
 ```
@@ -547,17 +553,17 @@ mybatis-plus:
 
 ---
 
-## 🤝 贡献
+## 贡献
 
 欢迎提 Issue 和 PR。
 
-- 🐛 [报告 Bug](../../issues/new?template=bug_report.md)
-- ✨ [功能建议](../../issues/new?template=feature_request.md)
-- 📝 提交前请运行 `mvn clean test`
+- [报告 Bug](../../issues/new?template=bug_report.md)
+- [功能建议](../../issues/new?template=feature_request.md)
+- 提交前请运行 `mvn clean test`
 
 ---
 
-## 📄 License
+## License
 
 本项目基于 [MIT License](LICENSE) 开源。
 
@@ -565,8 +571,8 @@ mybatis-plus:
 
 <div align="center">
 
-**如果这个项目对你有帮助，请给个 ⭐ Star**
+**如果这个项目对你有帮助，请给个 Star**
 
-Made with ☕ by [TTFCJ](https://github.com/TTFCJ)
+Made with Java by [TTFCJ](https://github.com/TTFCJ)
 
 </div>
